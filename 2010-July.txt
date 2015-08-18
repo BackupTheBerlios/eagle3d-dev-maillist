@@ -1,0 +1,62 @@
+From dev at datenheim.de  Fri Jul 30 12:52:03 2010
+From: dev at datenheim.de (Stefan Langer)
+Date: Fri, 30 Jul 2010 12:52:03 +0200
+Subject: [Eagle3d-dev] How to add further devices, example chip diode
+Message-ID: <4C52AED3.9040207@datenheim.de>
+
+Hi Matthias, hi all,
+
+if I compare content of some *.inc.src files with what I had added
+before locally (3dusrpac.dat and user.inc) you put me to trouble :)
+
+How are the .inc.src files formatted? They hold some lines for the
+*pack.dat and also the macros for the povray .inc files....
+
+I have here:
+
+[code from user.inc]
+/********************************************************************************************************************************************
+// DIODES in 0603, 0805 and 1206 package, such as TS4148 and others
+// based on the chip resistor macro
+********************************************************************************************************************************************/
+#macro DIODE_SMD_CHIP_GRND(b,l,h,blf,value)
+union{
+	box{<0    ,0    ,0.01> <blf    ,h+0.05 ,b-0.01>}
+	box{<l    ,0    ,0.01> <l-blf  ,h+0.05 ,b-0.01>}
+	box{<0.05 ,0.05 ,0   > <l-0.05 ,h      ,b     > pigment{White}}
+	box{<blf  ,h    ,0   > <l-blf  ,h+0.07 ,b     > texture{pigment{Gray20}
+finish{phong 0.5}}}
+	text {ttf besch_font value 0.1, 0
+		pigment{White} rotate<90,0,0> scale<l/3.5,1,b/1.5>
+		translate<l/3.8,h+0.08,b/3>}
+	texture{col_silver}
+	translate<-l/2,0,-b/2>
+}
+#end
+
+#macro DIODE_SMD_CHIP_1206(value)
+object{RES_SMD_CHIP_GRND(1.55,3.05,0.45,0.35,value)}
+#end
+#macro DIODE_SMD_CHIP_0805(value)
+object{RES_SMD_CHIP_GRND(1.25,2.00,0.45,0.30,value)}
+#end
+#macro DIODE_SMD_CHIP_0603(value)
+object{DIODE_SMD_CHIP_GRND(0.80,1.60,0.40,0.20,value)}
+#end
+
+[code from usrpack.dat]
+D0603:0:0:0:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:DIODE_SMD_CHIP_0603("<|":SMD
+Diode 0603:SMD Diode 0603
+D0805:0:0:0:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:DIODE_SMD_CHIP_0805("<|":SMD
+Diode 0805:SMD Diode 0805
+D1206:0:0:0:1:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:DIODE_SMD_CHIP_1206("<|":SMD
+Diode 1206:SMD Diode 1206
+
+Questions:
+How to correctly get that into the code tree?
+Just create a new file in /src/inc/diode? Need to include that anywhere
+else?
+
+Regards, Stefan
+
+

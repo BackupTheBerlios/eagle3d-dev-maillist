@@ -1,0 +1,38 @@
+From matthias at matwei.de  Mon Aug 16 22:32:46 2010
+From: matthias at matwei.de (Matthias =?ISO-8859-1?Q?Wei=DFer?=)
+Date: Mon, 16 Aug 2010 22:32:46 +0200
+Subject: [Eagle3d-dev] How to add further devices, example chip diode
+Message-ID: <1281990766.1802.34.camel@mat-frame>
+
+Hi Stefan
+
+missed your mail to the list. I was actually not member of the list.
+Stupid me.
+
+>Hi Matthias, hi all,
+>
+>if I compare content of some *.inc.src files with what I had added
+>before locally (3dusrpac.dat and user.inc) you put me to trouble :)
+
+Well, I expected that :-)
+
+>How are the .inc.src files formatted? They hold some lines for the
+>*pack.dat and also the macros for the povray .inc files....
+
+I just added a short description of the .inc.src files to the README in the SVN.
+
+>Questions:
+>How to correctly get that into the code tree?
+>Just create a new file in /src/inc/diode? Need to include that anywhere
+>else?
+
+No. Thats it. The build scripts will do the remaining work. Just call make 
+in the top level dir and you will get a Eagle3D directory structure in build/eagle3d
+
+-- 
+Matthias Wei?er
+matthias at matwei.de
+http://www.matwei.de
+
+
+
